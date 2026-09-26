@@ -1,39 +1,51 @@
 # Rejish J
 
-**AI & Python Developer**
-
-AI & Data Science student focused on Python, Linux, developer tools, and practical AI applications.
-
----
-
-## About
-
-- Building intelligent tools and systems with Python and Linux
-- Passionate about CLI applications, automation, and developer tooling
-- Exploring the intersection of AI and systems programming
-- Open to opportunities · Always learning
+I build **local-first developer tools in Python** — terminal software that
+keeps your data on your machine and works without a network.
 
 ---
 
-## Tech Stack
+### Selected work
 
-**Languages:** Python, Java, C, JavaScript, Bash  
-**Tools & OS:** Linux, Git, VS Code, Neovim  
-**AI & Data:** Machine Learning, Data Analysis, Automation, CLI Tools  
+**[cheat-cli](https://github.com/RejishJ/cheat-cli)** — a terminal-first cheat sheet
+Search, add, and run your own command references from the terminal: a Textual
+TUI, optional AI suggestions (local Ollama or OpenAI-compatible, with a real
+offline mode), and a data layer defined by a `StorageBackend` protocol.
 
+`pip install cheat-cli` · [PyPI](https://pypi.org/project/cheat-cli/) · MIT
+
+**Where the engineering is:**
+
+- `cheat_cli/core/` — storage contract (`load/save/add/update/delete`) kept
+  separate from the CSV implementation
+- `tests/` — 23 modules covering CLI, TUI, storage, safety, offline behavior
+- `.github/workflows/ci.yml` — ruff + tests on Python 3.9–3.12 + package
+  build validation on every PR
+- `CHANGELOG.md`, `SECURITY.md`, `CONTRIBUTING.md` — releases are tagged and
+  documented
 
 ---
 
-## Links
+### Currently building
 
-- **Portfolio:** [rejish-portfolio.vercel.app](https://rejish-portfolio.vercel.app/)
-- **GitHub:** [github.com/RejishJ](https://github.com/RejishJ)
-- **LinkedIn:** [linkedin.com/in/rejishjd](https://www.linkedin.com/in/rejishjd)
-- **LeetCode:** [leetcode.com/u/RejishJD](https://leetcode.com/u/RejishJD/)
-- **X:** [x.com/rejishjd](https://x.com/rejishjd)
-- **Discord:** [discord.com/users/rejishjd](https://discord.com/users/rejishjd)
-- **Email:** [rejish.j.d@gmail.com](mailto:rejish.j.d@gmail.com)
+- **cheat-cli** — next iteration of the storage layer
+- **SecureChain** — blockchain identity & asset platform (Solidity,
+  TypeScript, React), from Smart India Hackathon 2026.
+  *In progress — not public yet.*
 
 ---
 
-*This profile README is generated from my portfolio repository.*
+### How I work
+
+- Layer boundaries first: CLI/TUI → service → storage, nothing skipping layers
+- Tests describe behavior, not implementation details
+- Changes go through CI; releases are tagged with a changelog
+- Prefer software that works offline, keeps data local, and doesn't require an account.
+
+---
+
+### Contact
+
+[Portfolio](https://rejish-portfolio.vercel.app) ·
+[LinkedIn](https://www.linkedin.com/in/rejishjd) ·
+[rejish.j.d@gmail.com](mailto:rejish.j.d@gmail.com)
