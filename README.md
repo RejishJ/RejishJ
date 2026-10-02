@@ -1,89 +1,113 @@
 # Rejish J
 
-AI & Data Science student building practical, local-first developer tools in Python.
+**I build tools that work offline, keep your data where you can see it, and never ask you to make an account.**
 
-Coimbatore, Tamil Nadu, India · open to relevant opportunities
+AI & Data Science student · Coimbatore, Tamil Nadu, India · open to relevant opportunities
+
+[Portfolio](https://rejish-portfolio.vercel.app) → [GitHub](https://github.com/RejishJ) → [LinkedIn](https://www.linkedin.com/in/rejishjd)
 
 ---
 
-## Selected work
+I open a terminal first and a browser second. Most of what I make starts as
+something I wanted at a prompt: a cheat sheet I could actually *run*, a better
+way to read a repository's history, an AI feature that keeps working when the
+network drops. Python is home base. Linux is the office.
 
-### cheat-cli
+---
 
-A terminal-first cheat sheet for people who live in the shell: search, add, and
-run your own command references without leaving the terminal. The data is a
-plain file on your machine, and everything except the optional AI suggestions
-works with no network at all.
+## Work
 
-- **Local by default** — no account and no service behind it; your notes stay in
-  a file you can read, edit, and version yourself.
-- **Optional AI** — suggestions can run against local Ollama or any
-  OpenAI-compatible endpoint, and there is a genuine offline mode when nothing
-  is reachable.
-- **Replaceable underneath** — storage sits behind a small interface, so the CSV
-  backend is an implementation choice rather than the shape of the application.
-- **Released like a package** — `pip install cheat-cli` (MIT, current release
-  0.1.3), tagged releases, and CI running ruff, the tests, and a build check
-  across Python 3.9–3.12. The suite is 23 test modules covering the CLI, the
-  TUI, storage, safety, and offline behavior.
+### [cheat-cli](https://github.com/RejishJ/cheat-cli)
 
-[Source](https://github.com/RejishJ/cheat-cli) · [PyPI](https://pypi.org/project/cheat-cli/) · [Releases](https://github.com/RejishJ/cheat-cli/releases)
+*A cheat sheet for your terminal — searchable, editable, runnable.*
 
-### backintheday
+Every developer keeps a file of commands they can never quite remember.
+cheat-cli turns that file into a real tool: entries live in a plain CSV you can
+read and version yourself, AI suggestions run through local Ollama or any
+OpenAI-compatible endpoint, and `--offline` means the whole thing works with no
+network at all.
 
-A command-line tool for exploring how a Git repository evolved over time.
-`git log` answers what happened recently; this is aimed at the harder questions
-about a project's whole past — how activity was distributed, how a file changed,
-how two periods of development differ.
+The detail I like most: you can execute an entry straight from the TUI,
+and a deterministic classifier stops you first when a command looks like
+`rm -rf`, `dd`, `mkfs`, or `sudo` — it lists why, then asks. The docstring
+doesn't oversell it either: *a confirmation policy, not a sandbox*.
 
-Zero runtime dependencies, a layered structure that further commands are meant
-to sit on, architecture decision records for the trade-offs, and tests that
-build temporary Git repositories rather than touching real ones. It does one
-command today and says so plainly instead of implying the rest.
+```console
+$ cheat search docker
+tool    command                           description                          tags
+------  --------------------------------  -----------------------------------  ---------------
+docker  docker ps                         List running containers              containers list
+docker  docker compose up -d              Start services in detached mode      services start
+docker  docker compose logs -f            Follow service logs                  logs debug
+docker  docker exec -it <container> bash  Open shell in running container      shell access
+docker  docker system prune -a            Remove unused containers and images  cleanup space
+docker  docker images                     List docker images                   images list
+docker  docker volume ls                  List docker volumes                  volumes list
+```
+
+`pip install cheat-cli` · [PyPI](https://pypi.org/project/cheat-cli/) · [Releases](https://github.com/RejishJ/cheat-cli/releases) · MIT · CI on 3.9–3.12
+
+### [backintheday](https://github.com/RejishJ/daily-dev/tree/main/backintheday)
+
+*Git history, asked better questions than "what happened recently."*
+
+`git log` answers "what changed last week". The questions I actually had are
+bigger — how activity spread across a project's whole life, how one file
+drifted, how two eras of development compare. backintheday builds those
+higher-level views on raw git output, entirely on your own machine.
+
+Two decisions I'd defend in review: it shells out to the `git` CLI instead of
+taking a library dependency, and runtime stays standard-library-only. Both are
+written up as ADRs. The tests manufacture whole temporary repositories with
+real commits to run against. It ships one command today — `history` — and says
+so plainly rather than implying the rest.
 
 [source — nested in `daily-dev`](https://github.com/RejishJ/daily-dev/tree/main/backintheday)
 
-### autospare-marketplace
+### [autospare-marketplace](https://github.com/RejishJ/autospare-marketplace)
 
-An early-stage Flutter marketplace for vehicle spare parts: a customer app and a
-separate admin app, both backed by Firebase. Two apps over one backend meant
-solving state and sync for two different audiences rather than one.
+*Two Flutter apps over one Firebase backend, because a shop owner and a
+customer never want the same screen.*
 
----
+The interesting part wasn't the app — it was serving one inventory to two
+audiences with different rights: customers browse, filter by condition and
+track orders; the shop manages products, stock, and analytics. Provider and
+Riverpod over Firestore, Auth, and Storage.
 
-## How I work
-
-- **Keep the seams visible.** Interface, service, and storage stay separate
-  layers; nothing skips one to reach another, and the storage backend can be
-  replaced without rewriting what sits above it.
-- **Test the behavior that matters.** Suites that spin up real temporary Git
-  repositories, exercise the offline path, and check that destructive actions
-  ask first — not just the happy path.
-- **Default to local.** Files over services, no account requirement, network
-  optional. An AI feature should be an addition, never a dependency.
-- **Ship on purpose.** CI on every change, versioned releases with a changelog,
-  and security and contributing documents written before anyone asks for them.
+Honest status: early, rough in places, and the repository says exactly that.
 
 ---
 
-## Right now
+## How I build
 
-**Building** — small, dependency-light command-line tools in the same family as
-`cheat-cli`: local data, clear layers, no account. Software meant to stay useful
-for years rather than demos that need a server.
+- **Boundaries are load-bearing.** Interface, service, and storage stay
+  separate layers; the storage backend should be swappable without rewriting
+  what sits above it.
+- **Tests should make their own worlds.** Temporary git repositories, offline
+  paths, destructive-action confirmations — behavior, not the implementation
+  details behind it.
+- **Local first, account never.** Files you can read, no sign-up wall, network
+  optional. An AI feature is an addition, not a dependency.
+- **Ship it like you mean it.** CI on every change, tagged releases with a
+  changelog, and security and contributing docs written before anyone asks.
 
-**Learning** — AI and machine learning in depth alongside my degree, plus
-security, OS internals, and hardware. Coursework and side projects so far, and
-the part I like is how much they share with the tooling above.
+---
+
+## Now
+
+**Building** — more of the same on purpose: command-line tools that stay fast,
+local, and account-free. Most of the effort goes into cheat-cli's next
+iteration.
+
+**Learning** — machine learning in depth alongside my degree, then security,
+operating systems, and hardware — the territory where you can't hand-wave.
+Learning it the only way I know how: build it small, break it, fix it.
 
 ---
 
 ## Elsewhere
 
-[Portfolio](https://rejish-portfolio.vercel.app) ·
-[GitHub](https://github.com/RejishJ) ·
-[LinkedIn](https://www.linkedin.com/in/rejishjd) ·
-[rejish.j.d@gmail.com](mailto:rejish.j.d@gmail.com)
+[Portfolio](https://rejish-portfolio.vercel.app) · [GitHub](https://github.com/RejishJ) · [LinkedIn](https://www.linkedin.com/in/rejishjd) · [rejish.j.d@gmail.com](mailto:rejish.j.d@gmail.com)
 
-This README is the short version; the repositories carry the detail, and the
-portfolio carries the rest.
+Everything here is public — open the source. It explains itself better than
+this page can.
